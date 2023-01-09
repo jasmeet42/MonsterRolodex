@@ -1,0 +1,17 @@
+<div style="text-align: center;">
+  <div *ngIf="hasError; else showData">Error in loading data</div>
+
+  <ng-template #showData>
+    <div *ngIf="!users;else userList">Loading users</div>
+    <ng-template #userList>
+      <div style="margin-bottom: 10px;">
+        <a routerLink="/add">Add Monster</a>
+      </div>
+      <input type="text" [(ngModel)]="searchInput" (ngModelChange)="filterUserList()">
+      <mat-grid-list cols="4" [gutterSize]="'10px'" rowHeight="270" style="margin-top: 20px;">
+        <mat-grid-tile *ngFor="let user of users | filter:debouncedSearchInput:'name'" [style.background]="'cadetblue'">
+          <app-card [userInfo]="user"></app-card></mat-grid-tile>
+      </mat-grid-list>
+    </ng-template>
+  </ng-template>
+</div>

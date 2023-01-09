@@ -1,0 +1,24 @@
+<form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+    <label for="name">Name: </label>
+    <input formControlName="name" type="text" required>
+    <label for="username">Username: </label>
+    <input formControlName="username" required>
+    <label for="email">Email: </label>
+    <input formControlName="email" type="email">
+    <label for="street">Street: </label>
+    <input formControlName="street">
+    <label for="suite">Suite: </label>
+    <input formControlName="suite">
+    <label for="city">City: </label>
+    <input formControlName="city" type="text">
+    <label for="zipcode">Zipcode: </label>
+    <input formControlName="zipcode" type="number">
+    <label for="phone">Phone: </label>
+    <input formControlName="phone" type="tel">
+    <label for="website">Website: </label>
+    <input formControlName="website" type="url">
+    <label for="company">Company: </label>
+    <input formControlName="company" type="text">
+
+    <button type="submit" [disabled]="!addForm.valid" style="padding: .5em;margin-top: 2em;">Add</button>
+    </form>
