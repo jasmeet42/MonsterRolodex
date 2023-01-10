@@ -9,4 +9,8 @@ input {
     margin: .5em 0;
     font-weight: bold;
   }
+  .error {
+    color: red;
+    font-weight: bold;
+  }
   

@@ -12,8 +12,8 @@ import { UserService } from 'src/app/user.service';
   styleUrls: ['./add.component.css']
 })
 export class AddComponent {
-  @Input() lastUserId:number;
-  constructor(private fb: FormBuilder, private userService: UserService, private router:Router) { }
+  @Input() lastUserId: number;
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) { }
   addForm: FormGroup =
     this.fb.group({
       name: [''],
@@ -23,7 +23,7 @@ export class AddComponent {
       suite: [''],
       city: [''],
       zipcode: [''],
-      phone: [''],
+      phone: ['',Validators.pattern('[- +()0-9]+')],
       website: [''],
       company: ['']
     });
@@ -36,27 +36,39 @@ export class AddComponent {
   onSubmit() {
     console.log("submit");
     const formValue = this.addForm.value;
-    let user:User = new User();
-    user.id = this.lastUserId+1;
-    user.name=formValue.name;
-    user.username=formValue.username;
-    user.email=formValue.email;
-    let address=new Address();
-    address.street=formValue.street;
-    address.suite=formValue.suite;
-    address.city=formValue.city;
-    address.zipcode=formValue.zipcode;
-    user.address=address;
-    user.phone=formValue.phone;
+    let user: User = new User();
+    user.id = this.lastUserId + 1;
+    user.name = formValue.name;
+    user.username = formValue.username;
+    user.email = formValue.email;
+    let address = new Address();
+    address.street = formValue.street;
+    address.suite = formValue.suite;
+    address.city = formValue.city;
+    address.zipcode = formValue.zipcode;
+    user.address = address;
+    user.phone = formValue.phone;
     let company = new Company();
     company.name = formValue.company;
-    user.company= company;
-    user.website=formValue.website;
+    user.company = company;
+    user.website = formValue.website;
 
 
-    this.userService.addMonster(user).subscribe(addedUser=>{ 
-      this.router.navigate(["home"],{state: {data: addedUser}});
+    this.userService.addMonster(user).subscribe(addedUser => {
+      this.router.navigate(["home"], { state: { data: addedUser } });
     });
+  }
+  get name() {
+    return this.addForm.get('name');
+  }
+  get username() {
+    return this.addForm.get('username');
+  }
+  get email() {
+    return this.addForm.get('email');
+  }
+  get phone() {
+    return this.addForm.get('phone');
   }
 
 }

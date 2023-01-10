@@ -1,10 +1,19 @@
 <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
     <label for="name">Name: </label>
     <input formControlName="name" type="text" required>
+    <span *ngIf="name && name.invalid && name.dirty" class="error">
+        Name is required
+    </span>
     <label for="username">Username: </label>
     <input formControlName="username" required>
+    <span *ngIf="username && username.invalid && username.dirty" class="error">
+        Username is required
+    </span>
     <label for="email">Email: </label>
     <input formControlName="email" type="email">
+    <span *ngIf="email && email.invalid" class="error">
+        Email is invalid
+    </span>
     <label for="street">Street: </label>
     <input formControlName="street">
     <label for="suite">Suite: </label>
@@ -15,6 +24,9 @@
     <input formControlName="zipcode" type="number">
     <label for="phone">Phone: </label>
     <input formControlName="phone" type="tel">
+    <span *ngIf="phone && phone.invalid" class="error">
+        Phone number is invalid
+    </span>
     <label for="website">Website: </label>
     <input formControlName="website" type="url">
     <label for="company">Company: </label>
